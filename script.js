@@ -73,3 +73,29 @@ document.getElementById("nombre").addEventListener("keydown", function (evento) 
 document.getElementById("correo").addEventListener("keydown", function (evento) {
   if (evento.key === "Enter") validarCorreo();
 });
+
+// ===== Modo oscuro =====
+
+// Aplica el tema indicado y actualiza el texto del botón
+function aplicarTema(oscuro) {
+  document.body.classList.toggle("oscuro", oscuro);
+  document.getElementById("btnTema").innerText = oscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
+}
+
+// Cambia entre modo claro y oscuro, y guarda la preferencia del usuario
+function cambiarTema() {
+  let oscuro = !document.body.classList.contains("oscuro");
+  aplicarTema(oscuro);
+  try {
+    localStorage.setItem("tema", oscuro ? "oscuro" : "claro");
+  } catch (e) {
+    // Si el navegador no permite guardar, el tema solo dura hasta recargar
+  }
+}
+
+// Al cargar la página, se recupera el tema guardado
+try {
+  aplicarTema(localStorage.getItem("tema") === "oscuro");
+} catch (e) {
+  aplicarTema(false);
+}
