@@ -2,27 +2,45 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Proyecto web básico usando HTML, CSS, JavaScript, Git y GitHub" />
     <title>Mi Proyecto Web</title>
 
     <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Bienvenido a mi Página Web</h1>
-    <p>Este proyecto fue publicado usando GitHub.</p>
+    <!-- Encabezado de la página -->
+    <header>
+      <h1>Bienvenido a mi Página Web</h1>
+      <p>Este proyecto fue publicado usando GitHub.</p>
+    </header>
 
-    <p>Ingrese su nombre:</p>
+    <!-- Contenido principal -->
+    <main>
+      <!-- Sección de saludo -->
+      <section id="seccion-saludo">
+        <h2>Saludo personalizado</h2>
+        <label for="nombre">Ingrese su nombre:</label>
+        <input type="text" id="nombre" placeholder="Escribe tu nombre" />
+        <button onclick="saludar()">Saludar</button>
+        <p id="resultado"></p>
+      </section>
 
-    <input type="text" id="nombre" placeholder="Escribe tu nombre" />
+      <!-- Sección de contacto -->
+      <section id="seccion-contacto">
+        <h2>Formulario de contacto</h2>
+        <label for="correo">Ingrese su correo:</label>
+        <input type="email" id="correo" placeholder="Ingrese su correo" />
+        <button onclick="validarCorreo()">Validar correo</button>
+        <p id="mensajeCorreo"></p>
+      </section>
+    </main>
 
-    <button onclick="saludar()">Saludar</button>
-
-    <p id="resultado"></p>
-
-    <h2>Formulario de contacto</h2>
-    <input type="email" id="correo" placeholder="Ingrese su correo">
-    <button onclick="validarCorreo()">Validar correo</button>
-    <p id="mensajeCorreo"></p>
+    <!-- Pie de página -->
+    <footer>
+      <p>Desarrollo de Software I - Guía 07 - Control de Versiones con Git y GitHub</p>
+    </footer>
 
     <!-- Enlace al archivo JavaScript -->
     <script src="script.js"></script>
