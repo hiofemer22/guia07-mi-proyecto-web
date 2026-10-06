@@ -4,36 +4,72 @@ const REGEX_NOMBRE = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$/;
 // Correo: texto@dominio.extension
 const REGEX_CORREO = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
 
+// Muestra un mensaje con estilo según su tipo ("exito" o "error")
+// y marca el campo de texto con el mismo color
+function mostrarMensaje(mensaje, campo, texto, tipo) {
+  let icono = tipo === "exito" ? "✔ " : "✖ ";
+  mensaje.innerText = icono + texto;
+  mensaje.className = "mensaje " + tipo;
+  campo.className = "campo-" + tipo;
+}
+
+// Borra el mensaje y el color del campo
+function limpiarMensaje(mensaje, campo) {
+  mensaje.innerText = "";
+  mensaje.className = "";
+  campo.className = "";
+}
+
 function saludar() {
-  // Obtener el valor del input sin espacios al inicio ni al final
-  let nombre = document.getElementById("nombre").value.trim();
+  let campo = document.getElementById("nombre");
   let resultado = document.getElementById("resultado");
+  // Obtener el valor del input sin espacios al inicio ni al final
+  let nombre = campo.value.trim();
 
   // Validar si el usuario escribió algo
   if (nombre === "") {
-    resultado.innerText = "Por favor, ingresa tu nombre.";
+    mostrarMensaje(resultado, campo, "Por favor, ingresa tu nombre.", "error");
   } else if (nombre.length < 3) {
-    resultado.innerText = "El nombre debe tener al menos 3 caracteres.";
+    mostrarMensaje(resultado, campo, "El nombre debe tener al menos 3 caracteres.", "error");
   } else if (!REGEX_NOMBRE.test(nombre)) {
-    resultado.innerText = "El nombre solo puede contener letras y espacios.";
+    mostrarMensaje(resultado, campo, "El nombre solo puede contener letras y espacios.", "error");
   } else {
-    resultado.innerText = "Hola " + nombre + ", bienvenido al sistema.";
+    mostrarMensaje(resultado, campo, "Hola " + nombre + ", bienvenido al sistema.", "exito");
   }
 }
 
 function validarCorreo() {
-  // Obtener el valor del input sin espacios al inicio ni al final
-  let correo = document.getElementById("correo").value.trim();
+  let campo = document.getElementById("correo");
   let mensajeCorreo = document.getElementById("mensajeCorreo");
+  // Obtener el valor del input sin espacios al inicio ni al final
+  let correo = campo.value.trim();
 
   // Validar si el usuario escribió algo y si tiene un formato válido
   if (correo === "") {
-    mensajeCorreo.innerText = "Debe ingresar un correo.";
+    mostrarMensaje(mensajeCorreo, campo, "Debe ingresar un correo.", "error");
   } else if (!correo.includes("@")) {
-    mensajeCorreo.innerText = "El correo debe contener el símbolo @.";
+    mostrarMensaje(mensajeCorreo, campo, "El correo debe contener el símbolo @.", "error");
   } else if (!REGEX_CORREO.test(correo)) {
-    mensajeCorreo.innerText = "El formato del correo no es válido. Ejemplo: usuario@gmail.com";
+    mostrarMensaje(mensajeCorreo, campo, "El formato del correo no es válido. Ejemplo: usuario@gmail.com", "error");
   } else {
-    mensajeCorreo.innerText = "Correo " + correo + " registrado correctamente.";
+    mostrarMensaje(mensajeCorreo, campo, "Correo " + correo + " registrado correctamente.", "exito");
   }
 }
+
+// Al volver a escribir en un campo, se borra el mensaje anterior
+document.getElementById("nombre").addEventListener("input", function () {
+  limpiarMensaje(document.getElementById("resultado"), this);
+});
+
+document.getElementById("correo").addEventListener("input", function () {
+  limpiarMensaje(document.getElementById("mensajeCorreo"), this);
+});
+
+// Al presionar Enter en un campo, se ejecuta su botón
+document.getElementById("nombre").addEventListener("keydown", function (evento) {
+  if (evento.key === "Enter") saludar();
+});
+
+document.getElementById("correo").addEventListener("keydown", function (evento) {
+  if (evento.key === "Enter") validarCorreo();
+});

@@ -119,6 +119,46 @@ button:hover {
   margin-bottom: 0;
 }
 
+/* Mensajes dinámicos de éxito y error */
+.mensaje {
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  animation: aparecer 0.3s ease-out;
+}
+
+.mensaje.exito {
+  color: #1e7e34;
+  background-color: #e6f4ea;
+  border-left: 4px solid #28a745;
+}
+
+.mensaje.error {
+  color: #b02a37;
+  background-color: #fdecea;
+  border-left: 4px solid #dc3545;
+}
+
+/* Borde del campo según el resultado */
+input.campo-exito {
+  border-color: #28a745;
+}
+
+input.campo-error {
+  border-color: #dc3545;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Pie de página */
 footer {
   color: var(--color-texto-suave);
