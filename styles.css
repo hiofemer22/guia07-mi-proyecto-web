@@ -43,6 +43,7 @@ header p {
 /* Contenido principal: tarjetas una al lado de otra */
 main {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
   padding: 40px 20px;
@@ -55,7 +56,8 @@ section {
   border-radius: 12px;
   box-shadow: var(--sombra);
   padding: 25px 30px;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -123,4 +125,58 @@ footer {
   font-size: 14px;
   padding: 20px;
   border-top: 1px solid var(--color-borde);
+}
+
+/* ===== Diseño responsive ===== */
+
+/* Tablets: tarjetas más compactas */
+@media (max-width: 768px) {
+  header {
+    padding: 30px 15px;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
+
+  main {
+    gap: 20px;
+    padding: 30px 15px;
+  }
+}
+
+/* Celulares: tarjetas una debajo de otra ocupando todo el ancho */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 22px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  main {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+  }
+
+  section {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  /* En pantallas táctiles no hay "hover", se evita el salto de la tarjeta */
+  section:hover {
+    transform: none;
+  }
+
+  input,
+  button {
+    font-size: 16px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
 }
